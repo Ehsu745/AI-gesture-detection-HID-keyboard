@@ -6,7 +6,7 @@
 
 ## 系統架構
 
-![系統架構圖](./images/系統架構圖.png)
+![系統架構圖](./images/HW.png)
 ```
 USB 鏡頭 (1080P, UVC)
     │  USB
@@ -31,7 +31,7 @@ Computer (PowerPoint / Keynote / Slides)
 
 ## 通訊協議
 
-![軟體架構圖](./images/軟體架構圖.png)
+![軟體架構圖](./images/SW.png)
 
 樹莓派與 XIAO 之間採用自定義 4-byte 封包，搭配 checksum 防止資料毀損：
 
