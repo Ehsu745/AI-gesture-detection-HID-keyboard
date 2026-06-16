@@ -1,0 +1,13 @@
+[Unit]
+Description=AI Gesture Controller (button + LED, standalone mode)
+After=multi-user.target
+
+[Service]
+Type=simple
+User=raccoon
+ExecStart=/home/raccoon/venv311/bin/python /home/raccoon/controller.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
