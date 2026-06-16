@@ -3,24 +3,15 @@ import mediapipe as mp
 import serial
 import time
 
-import glob # 👈 記得在程式碼最頂端確認有沒有 import glob，沒有的話請補上
-
 # ============================================================================
-# 1. 自動模糊搜尋 Mac 系統當前的通用序列埠路徑
+# 1. 序列埠設定（Raspberry Pi GPIO UART）
 # ============================================================================
-ports = glob.glob('/dev/cu.usbmodem*')
-
-if not ports:
-    print("❌ 錯誤：找不到任何 STM32G431 的序列埠裝置！請檢查 Hub 是否插緊。")
-    exit()
-
-# 抓取目前系統撈到的第一個符合條件的路徑
-target_port = ports[0]
-print(f"📡 系統動態偵測成功！自動掛載通用序列埠路徑：{target_port}")
+SERIAL_PORT = '/dev/ttyS0'
+BAUD_RATE = 115200
 
 try:
-    ser = serial.Serial(target_port, 115200, timeout=1)
-    print("成功連接到 STM32G431！")
+    ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+    print(f"成功連接到 XIAO ESP32-S3！序列埠：{SERIAL_PORT}")
 except Exception as e:
     print(f"串口連接失敗：{e}")
     exit()
@@ -29,7 +20,6 @@ except Exception as e:
 # 2. 初始化 MediaPipe 手勢偵測
 # ============================================================================
 mp_hands = mp.solutions.hands
-mp_drawing = mp.solutions.drawing_utils
 hands = mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=1,
@@ -88,7 +78,7 @@ def send_packet(cmd):
     print(f"手勢變更！發送封包: {[hex(b) for b in packet]}")
 
 # ============================================================================
-# 4. 主迴圈
+# 4. 主迴圈（無頭模式：不開視窗、不等待按鍵）
 # ============================================================================
 cap = cv2.VideoCapture(0)
 print("AI 手勢辨識系統啟動！請對著相機比「讚」或「倒讚」...")
@@ -98,7 +88,7 @@ try:
         success, frame = cap.read()
         if not success:
             print("無法讀取視訊鏡頭，停止。")
-            break  # FIX: 原本是 continue，鏡頭真的斷掉會無限迴圈
+            break  # 鏡頭真的斷掉會直接結束，避免無限迴圈
 
         frame = cv2.flip(frame, 1)
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -108,19 +98,7 @@ try:
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
                 current_cmd = detect_gesture(hand_landmarks)
-
-                # 顯示辨識結果
-                if current_cmd == 0x01:
-                    cv2.putText(frame, "THUMB UP (NEXT)",
-                                (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                elif current_cmd == 0x02:
-                    cv2.putText(frame, "THUMB DOWN (PREV)",
-                                (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-                else:
-                    cv2.putText(frame, "...",
-                                (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (200, 200, 200), 2)
 
         # ====================================================================
         # 5. 邊緣觸發：手勢改變才發送
@@ -128,13 +106,7 @@ try:
         if current_cmd != last_cmd and current_cmd != 0:
             send_packet(current_cmd)
 
-        last_cmd = current_cmd  # FIX: 移到外層，手離開時重置為 0，
-                                #      下次比同一手勢仍可觸發
-
-        cv2.imshow('AI Gesture Simulator', frame)
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        last_cmd = current_cmd  # 手離開時重置為 0，下次比同一手勢仍可觸發
 
 except KeyboardInterrupt:
     pass
@@ -143,6 +115,5 @@ except KeyboardInterrupt:
 # 6. 釋放資源
 # ============================================================================
 cap.release()
-cv2.destroyAllWindows()
 ser.close()
 print("系統安全關閉。")
