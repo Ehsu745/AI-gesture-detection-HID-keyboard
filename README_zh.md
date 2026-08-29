@@ -4,6 +4,10 @@
 
 透過即時影像辨識手勢，將辨識結果轉換為標準 USB HID 鍵盤訊號，實現免接觸式簡報控制。
 
+<!-- 請將下方路徑替換為實際成品照片 -->
+![成品照](./images/product.jpg)
+
+
 ---
 
 ## 系統架構
@@ -226,4 +230,13 @@ sudo systemctl start gesture-controller.service
 
 ## 授權聲明
 
-本專案目前作為課程期末作業之學術成果展示，尚未附加正式的開源授權條款。硬體外殼設計基於 [Olvin 的 Raspberry Pi 4 Case](https://www.thingiverse.com/thing:4882960)，採用 **CC BY** 授權。
+本專案目前作為課程期末作業之學術成果展示，尚未附加正式的開源授權條款。
+
+### 3D 列印外殼
+
+外殼以 **Olvin 發布於 Thingiverse 的開源 Raspberry Pi 4 Case（CC BY 授權）** 為基底，以 Fusion 360 針對本專案需求進行客製化修改：
+
+- 增厚頂板高度，以容納內部元件
+- 在頂板上挖出恰好可鑲嵌 XIAO ESP32-S3 的凹槽，使其與頂板齊平
+
+> Olvin. (2021, June 11). *Raspberry Pi 4 Case (GPIO access, Fusion 360 model, Fan 30 and 40mm)* [3D model]. Thingiverse. https://www.thingiverse.com/thing:4882960. Licensed under CC BY.

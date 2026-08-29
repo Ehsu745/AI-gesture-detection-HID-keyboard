@@ -4,11 +4,15 @@
 
 Control presentations with hand gestures — no remote, no wearable, no contact required.
 
+<!-- Replace the line below with your actual product photo -->
+![Product photo](./images/product.jpg)
+
+
 ---
 
 ## System Architecture
 
-![System Architecture](./images/HW_En.png)
+![System Architecture](./images/HW.png)
 
 ```
 USB Camera (1080P, UVC)
@@ -34,7 +38,7 @@ Computer (PowerPoint / Keynote / Slides)
 
 ## Communication Protocol
 
-![Software Architecture](./images/SW_En.png)
+![Software Architecture](./images/SW.png)
 
 A custom 4-byte packet with checksum is used between the Raspberry Pi and XIAO:
 
@@ -228,4 +232,13 @@ sudo systemctl start gesture-controller.service
 
 ## License
 
-This project is an academic coursework submission. No open-source license has been applied at this stage. The 3D enclosure design is based on [Olvin's Raspberry Pi 4 Case](https://www.thingiverse.com/thing:4882960), licensed under **CC BY**.
+This project is an academic coursework submission. No open-source license has been applied at this stage.
+
+### 3D enclosure
+
+The enclosure is based on **Olvin's open-source Raspberry Pi 4 Case** (Thingiverse, CC BY), modified in Fusion 360 to fit the specific requirements of this project:
+
+- Increased top panel thickness to accommodate internal components
+- Added a recessed slot sized to fit the XIAO ESP32-S3 flush with the top surface
+
+> Olvin. (2021, June 11). *Raspberry Pi 4 Case (GPIO access, Fusion 360 model, Fan 30 and 40mm)* [3D model]. Thingiverse. https://www.thingiverse.com/thing:4882960. Licensed under CC BY.
