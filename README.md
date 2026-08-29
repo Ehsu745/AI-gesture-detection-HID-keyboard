@@ -4,9 +4,8 @@
 
 Control presentations with hand gestures — no remote, no wearable, no contact required.
 
-<!-- Replace the line below with your actual product photo -->
-![Product photo](./images/product.jpg)
-
+![Product — top view](./images/product-top.jpg)
+![Product — side view](./images/product-side.jpg)
 
 ---
 
@@ -240,5 +239,8 @@ The enclosure is based on **Olvin's open-source Raspberry Pi 4 Case** (Thingiver
 
 - Increased top panel thickness to accommodate internal components
 - Added a recessed slot sized to fit the XIAO ESP32-S3 flush with the top surface
+
+![Enclosure — exploded view](./images/enclosure-exploded.png)
+![Enclosure — front view](./images/enclosure-front.png)
 
 > Olvin. (2021, June 11). *Raspberry Pi 4 Case (GPIO access, Fusion 360 model, Fan 30 and 40mm)* [3D model]. Thingiverse. https://www.thingiverse.com/thing:4882960. Licensed under CC BY.

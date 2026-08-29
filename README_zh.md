@@ -4,8 +4,8 @@
 
 透過即時影像辨識手勢，將辨識結果轉換為標準 USB HID 鍵盤訊號，實現免接觸式簡報控制。
 
-<!-- 請將下方路徑替換為實際成品照片 -->
-![成品照](./images/product.jpg)
+![成品照 — 俯視](./images/product-top.jpg)
+![成品照 — 側面](./images/product-side.jpg)
 
 
 ---
@@ -238,5 +238,8 @@ sudo systemctl start gesture-controller.service
 
 - 增厚頂板高度，以容納內部元件
 - 在頂板上挖出恰好可鑲嵌 XIAO ESP32-S3 的凹槽，使其與頂板齊平
+
+![外殼設計 — 爆炸圖](./images/enclosure-exploded.png)
+![外殼設計 — 正面圖](./images/enclosure-front.png)
 
 > Olvin. (2021, June 11). *Raspberry Pi 4 Case (GPIO access, Fusion 360 model, Fan 30 and 40mm)* [3D model]. Thingiverse. https://www.thingiverse.com/thing:4882960. Licensed under CC BY.
