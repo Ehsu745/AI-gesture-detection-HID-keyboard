@@ -11,7 +11,7 @@ Control presentations with hand gestures — no remote, no wearable, no contact 
 
 ## System Architecture
 
-![System Architecture](./images/HW.png)
+![System Architecture](./images/HW_En.png)
 
 ```
 USB Camera (1080P, UVC)
@@ -37,7 +37,7 @@ Computer (PowerPoint / Keynote / Slides)
 
 ## Communication Protocol
 
-![Software Architecture](./images/SW.png)
+![Software Architecture](./images/SW_En.png)
 
 A custom 4-byte packet with checksum is used between the Raspberry Pi and XIAO:
 
